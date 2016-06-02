@@ -94,11 +94,11 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'model/Wmt', 'model/WmtApp', 'world
             // Configure the JET Router.
             var router = oj.Router.rootInstance;
             router.configure({
-                'home': {label: 'Home', isDefault: true},
+                'location': {label: 'Location', isDefault: true},
                 'layers': {label: 'Layers'},
-                'fires': {label: 'Fires'},
-                'weather': {label: 'Weather'},
-                'markers': {label: 'Markers'}
+                'markers': {label: 'Markers'},
+                'settings': {label: 'Settings'},
+                'help': {label: 'Help'}
             });
 
             function RootViewModel() {
@@ -108,16 +108,11 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'model/Wmt', 'model/WmtApp', 'world
                 // Shared navigation data and callbacks in an ArrayTableDataSource 
                 // for nav bar (medium+ screens) and nav drawer (small screens)
                 var navData = [
-                    {name: 'Home', id: 'home',
-                        iconClass: 'fa fa-home fa-lg oj-navigationlist-item-icon'},
-                    {name: 'Layers', id: 'layers',
-                        iconClass: 'fa fa-list fa-lg oj-navigationlist-item-icon'},
-                    {name: 'Fires', id: 'fires',
-                        iconClass: 'fa fa-fire fa-lg  oj-navigationlist-item-icon'},
-                    {name: 'Weather', id: 'weather',
-                        iconClass: 'fa fa-sun-o fa-lg oj-navigationlist-item-icon'},
-                    {name: 'Markers', id: 'markers',
-                        iconClass: 'fa fa-map-marker fa-lg oj-navigationlist-item-icon'}
+                    {name: 'Location', id: 'location', iconClass: 'fa fa-crosshairs fa-lg oj-navigationlist-item-icon'},
+                    {name: 'Layers', id: 'layers', iconClass: 'fa fa-list fa-lg oj-navigationlist-item-icon'},
+                    {name: 'Markers', id: 'markers', iconClass: 'fa fa-map-marker fa-lg oj-navigationlist-item-icon'},
+                    {name: 'Settings', id: 'settings', iconClass: 'fa fa-gear fa-lg oj-navigationlist-item-icon'},
+                    {name: 'Help', id: 'help', iconClass: 'fa fa-question fa-lg oj-navigationlist-item-icon'}
                 ];
                 self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
 

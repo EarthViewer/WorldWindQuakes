@@ -32,16 +32,19 @@
  * Your viewModel code goes here
  */
 
-define(['ojs/ojcore', 'knockout'],
-    function (oj, ko) {
+define(['ojs/ojcore', 'knockout', 'jquery',
+    'promise', 'ojs/ojknockout', 'ojs/ojcollapsible',
+    'ojs/ojlistview', 'ojs/ojdatacollection-common'],
+    function (oj, ko, $) {
         /**
          * The view model for the primary globe content view template
          */
-        function homeViewModel() {
-//            var model = controller.model;
-//            this.eyePosLatitude = model.viewModel.eyePosLatitude;
-//            this.eyePosLongitude = model.viewModel.eyePosLongitude;
+        function settingsViewModel() {
+//            var manager = controller.model.weatherScoutManager;
+//
+//            this.selectedItems = ko.observableArray([]);
+//            this.scouts = new oj.ArrayTableDataSource(manager.scouts, {idAttribute: "id"});
         }
 
-        return homeViewModel;
+        return settingsViewModel;
     });
