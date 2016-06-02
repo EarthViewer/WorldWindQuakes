@@ -3,19 +3,19 @@ Copyright (c) 2016, Bruce Schubert.
 The Modified BSD License (3-clause license)
 */
 
-.emxsys-icon {
-    width: 84px;
-    height: 25px;
+.branding-icon {
+    width:42px;
+    height:40px;
 }
-.emxsys-icon:before {
-    content: url("images/emxsys_80x25_transparent.png");
+.branding-icon:before {
+    content: url("images/nasa-logo.svg");
     display: inline;
 }
 /* Adds padding between logo and application name */
-html:not([dir="rtl"]) .emxsys-icon {
+html:not([dir="rtl"]) .branding-icon {
     padding-right: 4px;
 }
-html[dir="rtl"] .emxsys-icon {
+html[dir="rtl"] .branding-icon {
     padding-left: 4px;
 }
 
