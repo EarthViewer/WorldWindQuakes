@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2016, Bruce Schubert.
+The BSD 3-Clause License (Modified BSD License)
+-->
+<html lang="en-us">
+    <head>
+        <title>Emxsys</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Emergency Management Expert Systems - Web App">
+        <meta name="author" content="Bruce Schubert">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
+
+        <!-- Oracle's Alta theme provides the main styling -->
+        <link rel="stylesheet" href="css/libs/oj/v2.0.1/alta/oj-alta-min.css" type="text/css"/>
+
+        <!-- Font Awesome provides the icons -->
+        <link rel="stylesheet" href="css/libs/fa/font-awesome.min.css" type="text/css"/>
+
+        <!-- Custom application specific styling -->
+        <link rel="stylesheet" href="css/override.css" type="text/css"/>
+
+        <!-- RequireJS configuration file -->
+        <script data-main="js/main" src="js/libs/require/require.js"></script>
+    </head>
+    <body>
+
+        <!-- template for rendering navigation items shared between nav bar and nav list -->
+        <script type="text/html" id="navTemplate">
+            <!--Load the name and icon from data binding-->
+            <li><a href="#">
+                <span data-bind="css: $data['iconClass']"></span>
+                <!--Using Knockout containerless control flow for the name-->
+                <!-- ko text: $data['name'] --> <!--/ko-->
+            </a></li>
+        </script>
+
+        <!--See http://www.oracle.com/webfolder/technetwork/jet/stylingdoc.html#web-->
+        
+    <div id="globalBody" class="oj-web-applayout-offcanvas-wrapper oj-offcanvas-outer-wrapper">
+        <div class="oj-offcanvas-inner-wrapper">
+            <!--
+            ** This off-canvas section is used when the browser is resized to a
+            ** medium or smaller media query size. It moves the App Navigation into a drawer
+            -->
+            <div id="offcanvas" class="oj-contrast-marker oj-web-applayout-offcanvas oj-offcanvas-start"
+                 data-bind="ojModule: {viewName: 'navDrawer'}">
+            </div>
+
+            
+            <div class="oj-web-applayout-scrollable-wrapper">
+                <div class="oj-web-applayout-scrollable oj-web-applayout-page">
+                    <!-- 
+                    ** Header section which contains the Global Branding, Global Navigation,
+                    ** and Application Navigation code. 
+                    -->
+                    <header role="banner" class="oj-web-applayout-header" >
+                        <div class="oj-flex-bar oj-sm-align-items-center">
+                            <!--Off-canvas toggle button-->
+                            <div class="oj-flex-bar-start oj-md-hide">
+                                <button class="oj-button-lg" 
+                                        data-bind="click: toggleDrawer,
+                                        ojComponent: {
+                                            component:'ojButton', 
+                                            label: 'Application Navigation',
+                                            chroming: 'half', 
+                                            display: 'icons', 
+                                            icons: {start: 'oj-web-applayout-offcanvas-icon'}}">
+                                </button>
+                            </div>
+                            <!--Branding-->
+                            <div class = "oj-flex-bar-middle oj-sm-align-items-center">
+                                <span role="img" class="oj-sm-only-hide oj-icon emxsys-icon" title="Emxsys Logo"></span>
+                                <span class="oj-web-applayout-header-title" title="Application Name">WMT</span>
+                            </div>
+                            <!--Toolbar menu buttons-->
+                            <div class="oj-flex-bar-end" data-bind="ojModule: 'header'"></div>
+                        </div>
+                    </header>
+
+                    <!-- This is where your main page content will be loaded -->
+                    <div class="oj-web-applayout-content">
+                        <div class="oj-flex">
+                            <!--Main Sidebar-->
+                            <div class="oj-xl-3 oj-lg-3 oj-sm-12 oj-flex-item oj-flex">
+                                <div id="mainContent" role="main" class="oj-panel oj-margin oj-flex-item"
+                                     data-bind="ojModule: router.moduleConfig">
+                                    <!-- 
+                                      ** This ojModule binding is using "name" instead of "viewName".
+                                      ** When the "name" option is specified, ojModule expects that
+                                      ** the View and the ViewModel share the same base name.
+                                      ** The "viewName" option is used when the View does not have
+                                      ** an associated ViewModel or when the ViewModel has a different base name.
+                                    -->
+                                </div>
+                            </div>
+                            <!--/Main Sidebar-->
+
+                            <!--Globe and supporting sections-->
+                            <div class="oj-sm-12 oj-lg-9 oj-col">
+                                <div class='oj-row'>
+                                    <div class="oj-sm-12 oj-md-9 oj-col"> 
+                                        <!--Globe-->
+                                        <div role="region" class="oj-panel oj-margin">
+                                            <h1><span class="fa fa-globe fa-lg" aria-hidden="true" style="padding-right:5px;"></span>Globe
+                                                <!-- The globe's toolbar-->
+                                                <span class="interactive" style='float: right;'>
+                                                </span>
+                                            </h1>
+                                            
+                                            <!-- WorldWindow -->
+                                            <div class="noselect" id="worldwindow" style="height: 70vh">
+                                                <!--Set canvas' tab index so keydown events can be captured-->
+                                                <canvas id="canvasOne" tabindex="1" style="width: 100%; height: 100%"> 
+                                                    <h2>Use the latest Chrome or Firefox browsers.</h2>
+                                                </canvas> 
+                                            </div>
+                                            <!--/WorldWindow-->
+                                            
+                                        </div>
+                                        <!--/Globe-->
+                                    </div>
+                                    <div class="oj-sm-12 oj-md-3 oj-col"> 
+                                        <!--Overview-->
+                                        <!-- This section is used for displaying an overview of the selected item.
+                                          ** This ojModule binding is using "name" instead of "viewName". 
+                                          ** This tells the binding to look for and load the JavaScript 
+                                          ** module of the same name, before loading the view template file.  
+                                        -->
+                                        <div role="complementary" class="oj-panel oj-margin">
+                                            <div id="overviewContent" style="height: 70vh" data-bind="ojModule: { name: 'overview'}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="oj-sm-12 oj-col"> 
+                                        <!--Details-->
+                                        <!--  This section is usually used for the selected item details. 
+                                          ** Using the ojModule binding to load the specific HTML template
+                                          ** that will be shown on the page. Using the "viewName" option 
+                                          ** just loads the HTML template while binding it to the existing 
+                                          ** global viewmodel. 
+                                        -->
+                                        <div role="complementary" class="oj-panel oj-margin">
+                                            <div id="detailsContent" data-bind="ojModule: { viewName: 'details'}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

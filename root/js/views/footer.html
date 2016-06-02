@@ -1,0 +1,18 @@
+<!--
+ Copyright (c) 2016, Bruce Schubert.
+ The BSD 3-Clause "New" or "Revised" License 
+-->
+
+<!--
+  ** The footer displays navigation links on the bottom of the header#aboutbox
+-->
+<div class="oj-web-applayout-max-width">
+    <ul>
+        <!-- ko foreach: footerLinks -->
+        <li><a data-bind="text : name, attr : {id: linkId, href : linkTarget}"></a></li>
+        <!-- /ko -->
+    </ul>
+</div>
+<div class="oj-text-secondary-color oj-text-sm oj-web-applayout-max-width">
+    Copyright © 2016 Bruce Schubert. All rights reserved.
+</div>

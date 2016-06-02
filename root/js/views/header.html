@@ -1,0 +1,80 @@
+<!--
+Copyright (c) 2016, Bruce Schubert.
+The BSD 3-Clause "New" or "Revised" License 
+-->
+
+<!--Navigation menu, populated from RootViewModel.navDataSource (see main.js)-->
+<div role="navigation" 
+     data-bind="ojComponent: {
+        component: 'ojNavigationList',
+        optionChange: $parent.navChange, 
+        navigationLevel: 'application',
+        item: {template: 'navTemplate'},
+        data: $parent.navDataSource,
+        selection: $parent.router.stateId(), 
+        edge: 'top'}"
+     class="
+     oj-sm-only-hide 
+     oj-navigationlist-item-dividers 
+     oj-md-condense 
+     oj-md-justify-content-center 
+     oj-lg-justify-content-flex-end
+     ">
+</div>
+<!--Tools-->
+<div data-bind="ojComponent: {component:'ojToolbar'}" >
+    
+    <span class="oj-toolbar-separator" role="separator"></span>
+    
+    <!--Dropdown User Menu-->
+    <button id="userMenu"
+            data-bind="ojComponent: {
+                    component: 'ojButton', 
+                    label: userLogin,
+                    display: smScreen() ? 'icons' : 'all',
+                    icons: smScreen() ? {start: 'oj-icon demo-avatar-icon', end: null} : {end: null},
+                    chroming: 'half', menu: '#menu1'}">
+    </button>
+    <ul id='menu1' data-bind="ojComponent: {component: 'ojMenu', select: menuItemSelect}" style="display:none">
+        <li id="pref"><a href="#">Preferences</a></li>
+        <li id="help"><a href="#">Help</a></li>
+        <li id="about"><a href="#">About</a></li>
+    </ul>
+
+    <!--
+      ** About Box (with footer)
+    -->
+    <div style="display:none" 
+         id="aboutDialog" 
+         title="About the Wildfire Management Tool"
+         data-bind="ojComponent:{
+                    component: 'ojDialog',
+                    rootAttributes: { style: 'width: 620px; max-width: 100%; height: 350px;'}}">
+
+        <div class="oj-dialog-body">
+            <p>
+                The Wildfire Management Tool (WMT) is free software that displays the potential 
+                behavior of wildland fire.</p>
+            <hr>
+            <p><i>
+                    This software is provided by the copyright holders and contributors "as is" and
+                    any express or implied warranties, including, but not limited to, the implied
+                    warranties of merchantability and fitness for a particular purpose are
+                    disclaimed.</i></p>
+            <p><i>
+                    In no event shall the copyright holder or contributors be liable for 
+                    any direct, indirect, incidental, special, exemplary, or consequential damages
+                    (including, but not limited to, procurement of substitute goods or services;
+                    loss of use, data, or profits; or business interruption) however caused and
+                    on any theory of liability, whether in contract, strict liability, or tort
+                    (including negligence or otherwise) arising in any way out of the use of this
+                    software, even if advised of the possibility of such damage.</i></p>
+        </div>
+
+        <!--The footer displays a collection of links at the bottom of the about box-->
+        <footer class="oj-dialog-footer oj-web-applayout-footer"
+                role="contentinfo" data-bind="ojModule: 'footer'">
+        </footer>
+    </div>
+</div>
+
