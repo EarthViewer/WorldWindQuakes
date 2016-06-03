@@ -78,7 +78,8 @@
                             </div>
                             
                             <!--
-                            Branding. The OracleJET QuickStart template places this section in the 
+                            Branding. 
+                            The OracleJET QuickStart template places this section in the 
                             header.html, I moved it to index.html so that the branding displays 
                             right away, during the application startup.
                             -->
@@ -104,11 +105,12 @@
                                 <div id="mainContent" role="main" class="oj-panel oj-margin oj-flex-item"
                                      data-bind="ojModule: router.moduleConfig">
                                     <!-- 
-                                      ** This ojModule binding is using "name" instead of "viewName".
-                                      ** When the "name" option is specified, ojModule expects that
-                                      ** the View and the ViewModel share the same base name.
-                                      ** The "viewName" option is used when the View does not have
-                                      ** an associated ViewModel or when the ViewModel has a different base name.
+                                    ** This ojModule binding is using "name" instead of "viewName".
+                                    ** See the router configuration RootViewModel in main.js.
+                                    ** When the "name" option is specified, ojModule expects that
+                                    ** the View and the ViewModel share the same base name.
+                                    ** The "viewName" option is used when the View does not have
+                                    ** an associated ViewModel or when the ViewModel has a different base name.
                                     -->
                                 </div>
                             </div>
