@@ -44,14 +44,14 @@ define([
     'model/earth/Terrain',
     'model/util/WmtMath',
     'model/util/WmtUtil',
-    'model/Wmt',
+    'model/Explorer',
     'worldwind'],
     function (
         log,
         Terrain,
         wmtMath,
         wmtUtil,
-        wmt,
+        explorer,
         ww) {
         "use strict";
         /**
@@ -163,7 +163,7 @@ define([
                 throw new WorldWind.ArgumentError(
                     log.error("Terrain", "terrainNormalAtLatLon", "missingCoordinate(s)"));
             }
-            var radianDistance = (sampleRadius || wmt.configuration.terrainSampleRadius) * wmtUtil.METERS_TO_RADIANS,
+            var radianDistance = (sampleRadius || explorer.configuration.terrainSampleRadius) * wmtUtil.METERS_TO_RADIANS,
                 n0 = new WorldWind.Location(latitude, longitude),
                 n1 = new WorldWind.Location(),
                 n2 = new WorldWind.Location(),

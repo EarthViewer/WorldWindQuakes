@@ -34,23 +34,23 @@
  * Removable is a mix-in module that adds "remove" capabilites to an object.
  * 
  * @param {Publisher} publisher Extends the object with publish event capabilites.
- * @param {Wmt} wmt Constants.
+ * @param {Explorer} explorer Constants.
  * @returns {Removable}
  * 
  * @author Bruce Schubert
  */
 define([
     'model/util/Publisher',
-    'model/Wmt'],
+    'model/Explorer'],
     function (
         publisher,
-        wmt) {
+        explorer) {
         "use strict";
         var Removable = {
             remove: function () {
                 if (this.isRemovable) {
                     if (this.removeMe()) {
-                        this.fire(wmt.EVENT_OBJECT_REMOVED, this);
+                        this.fire(explorer.EVENT_OBJECT_REMOVED, this);
                     }
                 }
             },

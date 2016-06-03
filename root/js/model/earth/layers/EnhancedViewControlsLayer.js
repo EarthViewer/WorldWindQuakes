@@ -40,7 +40,7 @@
  * @author Bruce Schubert
  */
 define([
-    'model/Wmt',
+    'model/Explorer',
     'worldwind'],
     function (
         wmt,

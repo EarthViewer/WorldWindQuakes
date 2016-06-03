@@ -33,11 +33,11 @@
 
 define([
     'model/util/Log',
-    'model/Wmt',
+    'model/Explorer',
     'worldwind'],
     function (
         Log,
-        Wmt,
+        explorer,
         ww) {
         "use strict";
         var EnhancedLookAtNavigator = function (worldWindow) {
@@ -185,7 +185,7 @@ define([
 
             // Clamp range to values greater than 1 in order to prevent degenerating to a first-person navigator when
             // range is zero.
-            this.range = WorldWind.WWMath.clamp(this.range, 1, Wmt.NAVIGATOR_MAX_RANGE);
+            this.range = WorldWind.WWMath.clamp(this.range, 1, explorer.NAVIGATOR_MAX_RANGE);
 
             // Normalize heading to between -180 and +180.
             this.heading = WorldWind.Angle.normalizedDegrees(this.heading);

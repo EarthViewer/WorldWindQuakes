@@ -1,23 +1,30 @@
 /* 
  * Copyright (c) 2016 Bruce Schubert <bruce@emxsys.com>.
- * Released under the MIT License
- * http://www.opensource.org/licenses/mit-license.php
+ * The MIT License
+ * http://www.opensource.org/licenses/mit-license
  */
+
 
 /**
- * Your viewModel code goes here
+ * The LocationViewModel ensulates the data representing globe's camera position, i.e., the position 
+ * under the crosshairs.
+ * @param {OracleJet} oj
+ * @param {KnockOut} ko
+ * @param {Explorer} explorer
+ * @returns {LocationViewModel}
  */
+define(['ojs/ojcore', 'knockout', 'model/Explorer'],
+        function (oj, ko, explorer) {
 
-define(['ojs/ojcore', 'knockout'],
-    function (oj, ko) {
-        /**
-         * The view model for the primary globe content view template
-         */
-        function locationViewModel() {
+            /**
+             * Constructs a LocationViewModel.
+             * @returns {LocationViewModel} A new instance.
+             */
+            function LocationViewModel() {
 //            var model = controller.model;
 //            this.eyePosLatitude = model.viewModel.eyePosLatitude;
 //            this.eyePosLongitude = model.viewModel.eyePosLongitude;
-        }
+            }
 
-        return locationViewModel;
-    });
+            return LocationViewModel;
+        });

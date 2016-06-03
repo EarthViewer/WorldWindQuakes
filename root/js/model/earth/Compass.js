@@ -9,9 +9,9 @@
  * @exports Compass
  * @author t tgaskins $
  */
-define(['model/Wmt',
+define(['model/Explorer',
     'worldwind'],
-    function (Wmt, ww) {
+    function (explorer, ww) {
         "use strict";
 
         /**
@@ -30,7 +30,7 @@ define(['model/Wmt',
         var Compass = function () {
 
             var sOffset = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.5, WorldWind.OFFSET_FRACTION, 0.5),
-                iPath = Wmt.IMAGE_PATH + "notched-compass.png";
+                iPath = explorer.IMAGE_PATH + "notched-compass.png";
 
             // Inhererit the ScreenImage properties
             WorldWind.ScreenImage.call(this, sOffset, iPath);

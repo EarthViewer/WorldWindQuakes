@@ -32,15 +32,19 @@
 
 /**
  * The Settings module is responsible for saving and restoring the globe view between sessions.
+
+ *  * @author Bruce Schubert
  * 
- * @author Bruce Schubert
+ * @param {Log} Log
+ * @param {Explorer} explorer
+ * @returns {Settings}
  */
 define([
     'model/util/Log',
-    'model/Wmt'],
+    'model/Explorer'],
     function (
         Log,
-        Wmt) {
+        explorer) {
         "use strict";
         var Settings = {
             
@@ -97,18 +101,18 @@ define([
 
                     if (isNaN(lat) || isNaN(lon)) {
                         Log.warning("Settings", "restoreSessionSettings", "Previous state invalid: Using default lat/lon.");
-                        lat = Wmt.configuration.startupLatitude;
-                        lon = Wmt.configuration.startupLongitude;
+                        lat = explorer.configuration.startupLatitude;
+                        lon = explorer.configuration.startupLongitude;
                     }
                     if (isNaN(alt)) {
                         Log.warning("Settings", "restoreSessionSettings", "Previous state invalid: Using default altitude.");
-                        alt = Wmt.configuration.startupAltitude;
+                        alt = explorer.configuration.startupAltitude;
                     }
                     if (isNaN(head) || isNaN(tilt) || isNaN(roll)) {
                         Log.warning("Settings", "restoreSessionSettings", "Previous state invalid: Using default view angles.");
-                        head = Wmt.configuration.startupHeading;
-                        tilt = Wmt.configuration.startupTilt;
-                        roll = Wmt.configuration.startupRoll;
+                        head = explorer.configuration.startupHeading;
+                        tilt = explorer.configuration.startupTilt;
+                        roll = explorer.configuration.startupRoll;
                     }
                     
                     // Initiate animation to target

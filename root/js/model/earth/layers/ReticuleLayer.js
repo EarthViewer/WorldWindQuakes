@@ -44,7 +44,7 @@
 define([
     'model/earth/Compass',
     'model/earth/Crosshairs',
-    'model/Wmt',
+    'model/Explorer',
     'worldwind'],
     function (
         Compass,

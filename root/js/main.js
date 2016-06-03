@@ -1,6 +1,7 @@
 /* 
- * Copyright (c) 2016 Bruce Schubert - <bruce@emxsys.com>.
- * Released under the MIT License - http://www.opensource.org/licenses/mit-license.php
+ * Copyright (c) 2016 Bruce Schubert.
+ * The MIT License
+ * http://www.opensource.org/licenses/mit-license
  */
 
 /**
@@ -53,20 +54,28 @@ requirejs.config({
  * Although 'ojcore' and 'knockout' would be loaded in any case (they are specified as dependencies
  * by the modules themselves), we are listing them explicitly to get the references to the 'oj' and 'ko'
  * objects in the callback
+ * 
+ * @param {OracleJet} oj
+ * @param {Knockout} ko
+ * @param {JQuery} $
+ * @param {Explorer} explorer
+ * @param {ExplorerApp} app
+ * @param {WorldWind} ww
+ * @returns {undefined}
  */
-require(['ojs/ojcore', 'knockout', 'jquery', 'model/Wmt', 'model/WmtApp', 'worldwind',
+require(['ojs/ojcore', 'knockout', 'jquery', 'model/Explorer', 'model/ExplorerApp', 'worldwind',
     'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodule', 'ojs/ojoffcanvas', 'ojs/ojnavigationlist', 'ojs/ojarraytabledatasource'],
-        function (oj, ko, $, wmt, app, ww) { // this callback gets executed when all required modules are loaded
+        function (oj, ko, $, explorer, app, ww) { // this callback gets executed when all required modules are loaded
 
             // Specify the where the World Wind resources are located.
-            ww.configuration.baseUrl = wmt.WORLD_WIND_PATH;
+            ww.configuration.baseUrl = explorer.WORLD_WIND_PATH;
             // Set the logging level for the World Wind library
             ww.Logger.setLoggingLevel(ww.Logger.LEVEL_WARNING);
 
             // Override the ModuleBinding defaults to conform to this project's directory structure
             oj.ModuleBinding.defaults.modelPath = 'viewmodels/'; // the original is 'viewModels'
 
-            // Configure the JET Router.
+            // Retrieve the router static instance and configure the states.
             var router = oj.Router.rootInstance;
             router.configure({
                 'location': {label: 'Location', isDefault: true},
@@ -136,7 +145,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'model/Wmt', 'model/WmtApp', 'world
                         // Create the web app object and make it accessable via a global variable.
                         window.APP = new app();
 
-                        // bind your ViewModel for the content of the whole page body.
+                        // Bind the RootViewModel for the content of the whole page body.
                         ko.applyBindings(new RootViewModel(), document.getElementById('globalBody'));
                     },
                     function (error) {

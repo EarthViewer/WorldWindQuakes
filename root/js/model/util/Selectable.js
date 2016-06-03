@@ -33,15 +33,15 @@
 /**
  * Selectable is a mix-in module that adds the "select" capabilities to an object.
  * @param {Publisher} publisher Extends the object by adding the event generator.
- * @param {Wmt} wmt Constants.
+ * @param {Explorer} explorer Constants.
  * @returns {Selectable}
  * 
  * @author Bruce Schubert
  */
 define([
     'model/util/Publisher', 
-    'model/Wmt'],
-    function (publisher, wmt) {
+    'model/Explorer'],
+    function (publisher, explorer) {
         "use strict";
         
         var Selectable = {
@@ -49,7 +49,7 @@ define([
                 if (this.isSelectable) {
                     if (this.selectMe()) {
                         // Fire the selected event if we succeeded.
-                        this.fire(wmt.EVENT_OBJECT_SELECTED, this);
+                        this.fire(explorer.EVENT_OBJECT_SELECTED, this);
                     }
                 }
             },

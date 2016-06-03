@@ -35,16 +35,16 @@
  * and it injects some observable properties into the individual Layer objects.
  * 
  * @param {Knockout} ko
- * @param {Wmt} wmt
+ * @param {Explorer} explorer
  * @returns {LayerManager}
  */
 define([
     'knockout',
-    'model/Wmt',
+    'model/Explorer',
     'worldwind'],
     function (
         ko,
-        wmt) {
+        explorer) {
         "use strict";
         /**
          * 
@@ -100,7 +100,7 @@ define([
         LayerManager.prototype.addBackgroundLayer = function (layer) {
             var index = this.backgroundLayers().length;
 
-            LayerManager.applyOptionsToLayer(layer, {hideInMenu: true, enabled: true}, wmt.LAYER_CATEGORY_BACKGROUND);
+            LayerManager.applyOptionsToLayer(layer, {hideInMenu: true, enabled: true}, explorer.LAYER_CATEGORY_BACKGROUND);
 
             this.globe.wwd.insertLayer(index, layer);
             this.backgroundLayers.push(layer);
@@ -114,7 +114,7 @@ define([
         LayerManager.prototype.addBaseLayer = function (layer, options) {
             var index = this.backgroundLayers().length + this.baseLayers().length;
 
-            LayerManager.applyOptionsToLayer(layer, options, wmt.LAYER_CATEGORY_BASE);
+            LayerManager.applyOptionsToLayer(layer, options, explorer.LAYER_CATEGORY_BASE);
 
             this.globe.wwd.insertLayer(index, layer);
             this.baseLayers.push(layer);
@@ -129,7 +129,7 @@ define([
         LayerManager.prototype.addOverlayLayer = function (layer, options) {
             var index = this.backgroundLayers().length + this.baseLayers().length + this.overlayLayers().length;
 
-            LayerManager.applyOptionsToLayer(layer, options, wmt.LAYER_CATEGORY_OVERLAY);
+            LayerManager.applyOptionsToLayer(layer, options, explorer.LAYER_CATEGORY_OVERLAY);
 
             this.globe.wwd.insertLayer(index, layer);
             this.overlayLayers.push(layer);
@@ -144,7 +144,7 @@ define([
             var index = this.backgroundLayers().length + this.baseLayers().length + this.overlayLayers().length
                 + this.dataLayers().length;
 
-            LayerManager.applyOptionsToLayer(layer, options, wmt.LAYER_CATEGORY_DATA);
+            LayerManager.applyOptionsToLayer(layer, options, explorer.LAYER_CATEGORY_DATA);
 
             this.globe.wwd.insertLayer(index, layer);
             this.dataLayers.push(layer);
@@ -158,7 +158,7 @@ define([
             var index = this.backgroundLayers().length + this.baseLayers().length + this.overlayLayers().length
                 + this.dataLayers().length + this.widgetLayers().length;
 
-            LayerManager.applyOptionsToLayer(layer, {hideInMenu: true, enabled: true}, wmt.LAYER_CATEGORY_BACKGROUND);
+            LayerManager.applyOptionsToLayer(layer, {hideInMenu: true, enabled: true}, explorer.LAYER_CATEGORY_BACKGROUND);
 
             this.globe.wwd.insertLayer(index, layer);
             this.widgetLayers.push(layer);

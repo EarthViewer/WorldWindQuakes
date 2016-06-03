@@ -35,7 +35,7 @@
  * 
  * @param {Publisher} publisher Extends the object with publish event capabilites.
  * @param {WmtUtil} utils Utilties.
- * @param {Wmt} wmt Constants.
+ * @param {Explorer} explorer Constants.
  * @returns {Movable}
  * 
  * @author Bruce Schubert
@@ -43,28 +43,28 @@
 define([
     'util/Publisher',
     'util/WmtUtil',
-    'model/Wmt'],
+    'model/Explorer'],
     function (
         publisher,
         utils,
-        wmt) {
+        explorer) {
         "use strict";
         var Movable = {
             moveStarted: function () {
                 if (this.isMovable) {
-                    this.fire(wmt.EVENT_OBJECT_MOVE_STARTED, this);
+                    this.fire(explorer.EVENT_OBJECT_MOVE_STARTED, this);
                 }
             },
             moveToLatLon: function (latitude, longitude) {
                 if (this.isMovable) {
                     this.latitude = latitude;
                     this.longitude = longitude;
-                    this.fire(wmt.EVENT_OBJECT_MOVED, this);
+                    this.fire(explorer.EVENT_OBJECT_MOVED, this);
                 }
             },
             moveFinished: function () {
                 if (this.isMovable) {
-                    this.fire(wmt.EVENT_OBJECT_MOVE_FINISHED, this);
+                    this.fire(explorer.EVENT_OBJECT_MOVE_FINISHED, this);
                 }
             },
             /**

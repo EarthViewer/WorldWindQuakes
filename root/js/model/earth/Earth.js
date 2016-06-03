@@ -46,7 +46,7 @@
  * @param {Terrain} Terrain Aspect, slope and elevation.
  * @param {TerrainProvider} TerrainProvider Provides terrain data.
  * @param {Viewpoint} Viewpoint Eye position and target terrain.
- * @param {Wmt} wmt Constants.
+ * @param {Wmt} explorer Constants.
  * @param {WorldWind} ww
  * @returns {Earth}
  * 
@@ -67,7 +67,7 @@ define([
     'model/earth/TerrainProvider',
     'model/earth/Viewpoint',
     'model/util/WmtUtil',
-    'model/Wmt',
+    'model/Explorer',
     'worldwind'],
     function (
         DnDController,
@@ -84,7 +84,7 @@ define([
         TerrainProvider,
         Viewpoint,
         util,
-        wmt,
+        explorer,
         ww) {
         "use strict";
         /**
@@ -138,12 +138,12 @@ define([
                 showBackground = options ? options.showBackground : true,
                 showReticule = options ? options.showReticule : true,
                 showViewControls = options ? options.showViewControls : true,
-                includePanControls = options ? options.includePanControls : wmt.configuration.showPanControl,
+                includePanControls = options ? options.includePanControls : explorer.configuration.showPanControl,
                 includeRotateControls = options ? options.includeRotateControls : true,
                 includeTiltControls = options ? options.includeTiltControls : true,
                 includeZoomControls = options ? options.includeZoomControls : true,
-                includeExaggerationControls = options ? options.includeExaggerationControls : wmt.configuration.showExaggerationControl,
-                includeFieldOfViewControls = options ? options.includeFieldOfViewControls : wmt.configuration.showFiewOfViewControl,
+                includeExaggerationControls = options ? options.includeExaggerationControls : explorer.configuration.showExaggerationControl,
+                includeFieldOfViewControls = options ? options.includeFieldOfViewControls : explorer.configuration.showFiewOfViewControl,
                 layer,
                 i, max;
             // Add optional background layer
@@ -161,12 +161,12 @@ define([
             // Add optional view controls layer
             if (showViewControls || showViewControls === undefined) {
                 layer = new EnhancedViewControlsLayer(this.wwd);
-                layer.showPanControl = (includePanControls === undefined) ? wmt.configuration.showPanControl : includePanControls;
+                layer.showPanControl = (includePanControls === undefined) ? explorer.configuration.showPanControl : includePanControls;
                 layer.showHeadingControl = (includeRotateControls === undefined) ? true : includeRotateControls;
                 layer.showTiltControl = (includeTiltControls === undefined) ? true : includeTiltControls;
                 layer.showZoomControl = (includeZoomControls === undefined) ? true : includeZoomControls;
-                layer.showExaggerationControl = (includeExaggerationControls === undefined) ? wmt.configuration.showExaggerationControl : includeExaggerationControls;
-                layer.showFieldOfViewControl = (includeFieldOfViewControls === undefined) ? wmt.configuration.showFieldOfViewControl : includeFieldOfViewControls;
+                layer.showExaggerationControl = (includeExaggerationControls === undefined) ? explorer.configuration.showExaggerationControl : includeExaggerationControls;
+                layer.showFieldOfViewControl = (includeFieldOfViewControls === undefined) ? explorer.configuration.showFieldOfViewControl : includeFieldOfViewControls;
                 this.layerManager.addWidgetLayer(layer);
             }
             // Add handler to redraw the WorldWindow during resize events
@@ -399,12 +399,12 @@ define([
          * Resets the viewpoint to the startup configuration settings.
          */
         Earth.prototype.reset = function () {
-            this.wwd.navigator.lookAtLocation.latitude = Number(wmt.configuration.startupLatitude);
-            this.wwd.navigator.lookAtLocation.longitude = Number(wmt.configuration.startupLongitude);
-            this.wwd.navigator.range = Number(wmt.configuration.startupAltitude);
-            this.wwd.navigator.heading = Number(wmt.configuration.startupHeading);
-            this.wwd.navigator.tilt = Number(wmt.configuration.startupTilt);
-            this.wwd.navigator.roll = Number(wmt.configuration.startupRoll);
+            this.wwd.navigator.lookAtLocation.latitude = Number(explorer.configuration.startupLatitude);
+            this.wwd.navigator.lookAtLocation.longitude = Number(explorer.configuration.startupLongitude);
+            this.wwd.navigator.range = Number(explorer.configuration.startupAltitude);
+            this.wwd.navigator.heading = Number(explorer.configuration.startupHeading);
+            this.wwd.navigator.tilt = Number(explorer.configuration.startupTilt);
+            this.wwd.navigator.roll = Number(explorer.configuration.startupRoll);
             this.wwd.redraw();
         };
 
@@ -442,7 +442,7 @@ define([
          * @param {String} projectionName A PROJECTION_NAME_* constant.
          */
         Earth.prototype.setProjection = function (projectionName) {
-            if (projectionName === wmt.PROJECTION_NAME_3D) {
+            if (projectionName === explorer.PROJECTION_NAME_3D) {
                 if (!this.roundGlobe) {
                     this.roundGlobe = new WorldWind.Globe(new WorldWind.EarthElevationModel());
                 }
@@ -455,17 +455,17 @@ define([
                     this.flatGlobe = new WorldWind.Globe2D();
                 }
 
-                if (projectionName === wmt.PROJECTION_NAME_EQ_RECT) {
+                if (projectionName === explorer.PROJECTION_NAME_EQ_RECT) {
                     this.flatGlobe.projection = new WorldWind.ProjectionEquirectangular();
-                } else if (projectionName === wmt.PROJECTION_NAME_MERCATOR) {
+                } else if (projectionName === explorer.PROJECTION_NAME_MERCATOR) {
                     this.flatGlobe.projection = new WorldWind.ProjectionMercator();
-                } else if (projectionName === wmt.PROJECTION_NAME_NORTH_POLAR) {
+                } else if (projectionName === explorer.PROJECTION_NAME_NORTH_POLAR) {
                     this.flatGlobe.projection = new WorldWind.ProjectionPolarEquidistant("North");
-                } else if (projectionName === wmt.PROJECTION_NAME_SOUTH_POLAR) {
+                } else if (projectionName === explorer.PROJECTION_NAME_SOUTH_POLAR) {
                     this.flatGlobe.projection = new WorldWind.ProjectionPolarEquidistant("South");
-                } else if (projectionName === wmt.PROJECTION_NAME_NORTH_UPS) {
+                } else if (projectionName === explorer.PROJECTION_NAME_NORTH_UPS) {
                     this.flatGlobe.projection = new WorldWind.ProjectionUPS("North");
-                } else if (projectionName === wmt.PROJECTION_NAME_SOUTH_UPS) {
+                } else if (projectionName === explorer.PROJECTION_NAME_SOUTH_UPS) {
                     this.flatGlobe.projection = new WorldWind.ProjectionUPS("South");
                 }
 
