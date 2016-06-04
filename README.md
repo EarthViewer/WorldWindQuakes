@@ -1,2 +1,2 @@
-# WorldWindExplorer
-OracleJET app framework incorporating NASA WebWorldWind
+# WorldWindQuakes
+Earthquake viewer using NASA World Wind
